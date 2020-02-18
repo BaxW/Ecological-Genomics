@@ -1,0 +1,11 @@
+---
+title: "ECOGEN Homepage"
+author: "Baxter Worthing"
+output: 
+  prettydoc::html_pretty:
+    theme: cayman
+---
+
+This site contains some of my materials for the Ecological Genomics class I am taking (Spring 2020)
+
+[My notebook for this class](EGgithubNotebook.html)

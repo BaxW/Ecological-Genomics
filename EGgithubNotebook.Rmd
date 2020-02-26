@@ -249,7 +249,97 @@ chunk_output_type: console
 <div id='id-section21'/>   
 
 ### Entry 21: 2020-01-29, Wednesday.   
+# in class 1/29 "popgen day 1"
 
+Q score == prob that sequencer got basecall wrong
+
+I am woking with the XSK reads 
+```{bash}
+
+# note that server is running Red Hat 7.7
+
+# fastq files for exome capture located here
+cd /data/project_data/RS_ExomeSeq/fastq/edge_fastq/
+
+```
+
+
+heres the script we wrote for fastqc (fastqc.sh)
+
+
+```{bash}
+
+#!/bin/bash
+
+cd ~/Ecological-Genomics/myresults
+
+mkdir fastqc
+
+for file in /data/project_data/RS_ExomeSeq/fastq/edge_fastq/XSK*fastq.gz
+
+do
+
+fastqc ${file} -o fastqc/
+
+done
+```
+
+then hit it with a chmod u+x
+
+```{bash}
+./fastqc.sh
+```
+
+
+then we used trimmomatic with the script (Ecological-Genomics/myscripts/trim_loop.sh)
+
+homework = run fastqc on trimmed seqs 
+
+
+```{bash}
+cp /data/scripts/process_bam.sh myscripts/
+```
+
+here's the script (after I edited it)
+
+```{bash}
+#!/bin/bash
+
+# We'll use this a wrapper to run our different mapping scripts
+
+# Path to my repo
+myrepo="/users/b/w/bwworthi/Ecological-Genomics"
+
+# echo ${myrepo}  <- to call my repo
+
+# My population:
+mypop="XSK"
+
+# Directory to our cleaned and paired reads:
+input="/data/project_data/RS_ExomeSeq/fastq/edge_fastq/pairedcleanreads/${mypop}"
+
+# Directory to store the outputs of our mapping
+# This part below goes to the common space
+output="/data/project_data/RS_ExomeSeq/mapping"
+
+# Run mapping.sh
+source ./mapping.sh
+
+# Run the post-processing steps
+source ./process_bam.sh
+```
+
+
+
+now  run the mapping pipeline script 
+
+```{bash}
+# from within screen
+cd myscripts/
+
+bash mypipeline.sh
+
+```
 
 
 ------
@@ -264,7 +354,57 @@ chunk_output_type: console
 
 ### Entry 23: 2020-01-31, Friday.   
 
+find the flag code of the last read in a sam file 
+then you can search it on here https://broadinstitute.github.io/picard/explain-flags.html
 
+```{bash}
+tail -n 1 XSK_01.sam | awk '{print $2}'
+```
+
+flagsats for each bam file 
+
+heres's the script 
+
+```{bash}
+#!/bin/bash
+
+# set repo
+
+myrepo="/users/b/w/bwworthi/Ecological-Genomics/"
+
+mypop="XSK"
+
+output="/data/project_data/RS_ExomeSeq/mapping/"
+
+echo "Num.reads R1 R2 Paired MateMapped Singletons MateMappedDiffChr" > ${myrepo}/myresults/${mypop}.flagstats.txt
+
+for file in ${output}/BWA/${mypop}*.sorted.rmdup.bam
+
+	do 
+	
+f=${file/.sorted.rmdup.bam}
+name=`basename ${f}`
+echo $name >> ${myrepo}/myresults/${mypop}.names.txt
+
+# take flagstat output, grab only rows between 6 and 12 and then take first col and flip it into a row 
+samtools flagstat ${file} | awk 'NR>=6&&NR<=12 {print $1}' | column -x 
+
+done >> ${myrepo}/myresults/${mypop}.flagstats.txt
+
+# find depth of coverage for these
+
+for file in ${output}/BWA/${mypop}*.sorted.rmdup.bam
+
+	do
+	# find average depth across all locations 
+	samtools depth ${file} | awk '{sum+=$3} END {print sum/NR}'
+	done >> ${myrepo}/myresults/${mypop}.coverage.txt
+```
+
+
+```{bash}
+bash myscripts/bamstats.sh
+```
 
 ------
 <div id='id-section24'/>   
@@ -355,7 +495,36 @@ chunk_output_type: console
 
 ### Entry 36: 2020-02-19, Wednesday.   
 
+site freqency spectrum:
 
+x axis = frequency of derived allele. units are 2*N (2 bc assuming diploid), so if some derived allele is fixed in the population, if will have a requnecy of 2N (everyone is homozygous for it). 
+y axis = proportion of total alleles that fall into each level of frequency 
+
+expectation based on coalescent theory == negative poisson looking histogram, as we would expect most derived allels to be present at low frequency
+
+our issue: spike of high freqency for loci that are polypmorphic in everyone
+    + cause = our assumption that reference is ancestral is wrong
+    
+solution= re run angsd but make SFS based on minor allele rather than derived allele which will essentially fold the SFS  over at x =1N (N = total # individuals)
+
+note that a selective sweep will produce an SFS that has many more common and rare derived allleles than expected under the neutral model.
+...also note that a selective sweep will have a larger effect on Tajima's estimator than on waterson's theta. 
+
+theta = the expected number of mutations within a linage. theta=4Nut where t is divergence time and u is mutation rate 
+pi = number of pairwise diffs 
+
+theta estimated from pi is called tajima's estimator 
+
+* tajima's D:
+    + used to decetect deviations from the distribution of allele frequencies that we would expect under neutrality 
+    + requires 2 other stats: Waterson's theta (number of segregating sites) and Tajima's estimator (based on average number of pairwise differences)
+    + both stats are expected to give the same estimate under neutrality, but when a slecective sweep happens, wtersons will be greater than taj's. the reverse is true for balancing selection. 
+    + Taj's D = (Taj's estimator - waterson's theta)/sqrt(var(Taj's estimator - waterson's theta))
+    + =0 under neutrality
+    + =+ if balancing slection
+    + =- if recent selective sweep 
+
+plan going forward: site freq spectrum estimate -> estimate real sfs -> calculate theta (doTheta) -> theta_stats -> finally have measure of nucleotide diversity 
 
 ------
 <div id='id-section37'/>   

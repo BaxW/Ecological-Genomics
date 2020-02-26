@@ -1,0 +1,69 @@
+	-> Command: 
+ANGSD -b /users/b/w/bwworthi/Ecological-Genomics/myresults/ANGSD/XSK_bam.list -ref /data/project_data/RS_ExomeSeq/ReferenceGenomes/Pabies1.0-genome_reduced.fa -anc /data/project_data/RS_ExomeSeq/ReferenceGenomes/Pabies1.0-genome_reduced.fa-out /users/b/w/bwworthi/Ecological-Genomics/myresults/ANGSD/XSK_allsites -nThreads 1 -remove_bads 1 -C 50 -baq 1 -minMapQ 20 -minQ 20 -setMinDepth 3 -minInd 2 -setMinDepthInd 1 -setMaxDepthInd 17 -skipTriallelic 1 -GL 1 -doCounts 1 -doMajorMinor 1 -doMaf 1 -doSaf 1 -fold 1 
+	-> angsd version: 0.931-14-gb9c8ddd (htslib: 1.10.2-19-gecf0216) build(Feb  2 2020 10:27:51)
+	-> Wed Feb 19 09:32:37 2020
+----------------
+multiReader.cpp:
+	-nLines	50	(Number of lines to read)
+	-beagle	(null)	(Beagle Filename (can be .gz))
+	-vcf-GL	(null)	(vcf Filename (can be .gz))
+	-vcf-GP	(null)	(vcf Filename (can be .gz))
+	-glf	(null)	(glf Filename (can be .gz))
+	-pileup	(null)	(pileup Filename (can be .gz))
+	-intName 1	(Assume First column is chr_position)
+	-isSim	1	(Simulated data assumes ancestral is A)
+	-nInd	0		(Number of individuals)
+	-minQ	20	(minimum base quality; only used in pileupreader)
+	-fai	(null)	(fai file)
+	-minQ	20	(minimum base quality; only used in pileupreader)
+----------------
+multiReader.cpp:
+---------------
+parseArgs_bambi.cpp: bam reader:
+	-bam/-b		/users/b/w/bwworthi/Ecological-Genomics/myresults/ANGSD/XSK_bam.list	(list of BAM/CRAM files)
+	-i		/users/b/w/bwworthi/Ecological-Genomics/myresults/ANGSD/XSK_bam.list	(Single BAM/CRAM file)
+	-r		(null)	Supply a single region in commandline (see examples below)
+	-rf		(null)	Supply multiple regions in a file (see examples below)
+	-remove_bads	1	Discard 'bad' reads, (flag >=256) 
+	-uniqueOnly	0	Discards reads that doesn't map uniquely
+	-show		0	Mimic 'samtools mpileup' also supply -ref fasta for printing reference column
+	-minMapQ	20	Discard reads with mapping quality below
+	-minQ		20	Discard bases with base quality below
+	-trim		0	Number of based to discard at both ends of the reads
+	-trim		0	Number of based to discard at 5' ends of the reads
+	-trim		0	Number of based to discard at 3' ends of the reads
+	-only_proper_pairs 1	Only use reads where the mate could be mapped
+	-C		50	adjust mapQ for excessive mismatches (as SAMtools), supply -ref
+	-baq		1	adjust qscores around indels (1=normal baq 2= extended(as SAMtools)), supply -ref
+	-redo-baq		0 (recompute baq, instead of using BQ tag)
+	-checkBamHeaders 1	Exit if difference in BAM headers
+	-doCheck	1	Keep going even if datafile is not suffixed with .bam/.cram
+	-downSample	0.000000	Downsample to the fraction of original data
+	-nReads		50	Number of reads to pop from each BAM/CRAMs
+	-minChunkSize	250	Minimum size of chunk sent to analyses
+	--ignore-RG	1	(dev only)
+	+RG	(null)	Readgroups to include in analysis(can be filename)
+
+Examples for region specification:
+		chr:		Use entire chromosome: chr
+		chr:start-	Use region from start to end of chr
+		chr:-stop	Use region from beginning of chromosome: chr to stop
+		chr:start-stop	Use region from start to stop from chromosome: chr
+		chr:site	Use single site on chromosome: chr
+--------------------
+[shared.cpp:init()]
+	-nThreads	1	Number of threads to use
+	-nQueueSize	-1	Maximum number of queud elements
+	-howOften	100	How often should the program show progress
+--------------
+abcFilter.cpp:
+	-sites		(null)	(File containing sites to keep (chr pos))
+	-sites		(null)	(File containing sites to keep (chr regStart regStop))
+	-sites		(null)	(File containing sites to keep (chr pos major minor))
+	-sites		(null)	(File containing sites to keep (chr pos major minor af ac an))
+	-minInd		2	Only use site if atleast minInd of samples has data
+	-setMinDepthInd	1	Only use site if atleast minInd of samples has this minimum depth 
+	-capDepth	-1	Only use the first capDepth bases
+	-strict	1	 (experimental)
+	1) You can force major/minor by -doMajorMinor 3
+	And make sure file contains 4 columns (chr tab pos tab major tab minor)

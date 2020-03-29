@@ -287,6 +287,11 @@ $(document).ready(function () {
 </div>
 <div id="entry-9-2020-01-13-monday." class="section level3">
 <h3>Entry 9: 2020-01-13, Monday.</h3>
+<p>Fst as direct product of Wright’s island model. each island has pop of same size so begs the question how much does drift alone (bc no selection in this model) affect allele freq differences in each pop and how does pop size decay this expected Fst</p>
+<p>Fisher’s thought on relative fitness of alleles: should see rapid fixation of selected alllele in any pop and therefore you would expect v little standing variation (save for minor allele sheltering in heterozygotes due to dominance)… SO why is there ever standing variation</p>
+<p>ecological genomics is all about wtf is the expalanation for this standing variation</p>
+<p>molecular evolution: M. Kimura: neutral theory of molecualr evolution: p(new mutation)= 1/2N = prob of fixation of mutation (assuming neutral) - enter modern central dogma: well tunrs out wobble exists so some mutations are synonimous |- dN/dS = Nmutations/N non-synom sites / N synonimous mutations / N synon sites = w w &gt;&gt; 1 positive slection w = 1 neutral w &lt;&lt; 1 negative/purifying selection</p>
+<p>Ecological genomics = molecular evolution + pop gen + ecology + NGS data</p>
 <hr />
 <div id="id-section10"></div>
 
@@ -299,10 +304,35 @@ $(document).ready(function () {
 </div>
 <div id="entry-11-2020-01-15-wednesday." class="section level3">
 <h3>Entry 11: 2020-01-15, Wednesday.</h3>
+<p>ILLumina:</p>
+<p>shear genomic DNA into 200-300bp fragments ligate adaptors apply to flowcell that contains lawn of complimentaary adaptors have adaptors with primers built in on both ends so bridge can form. can then create clusters of the same fragment via bridge amplification PCR then sequenceing throug synthesis with flourencently-tagged bases (dNTPs) that have a built in terminator that can be cleaved before the next pulse of dNTPs</p>
+<p>myseq: 30mill reads per run hiseq: 3bill novaseq 13 bill sanger: 400</p>
+<p>long read sequencing:</p>
+<p>SMRT- single molecule realtime tech +pacbio + ONT</p>
+<ul>
+<li>Pacbio:
+<ul>
+<li>DNA strand is fed to fixed-position polymerase within a well that contains laser/camera. Still uses dNTP that are incorperated and floouresence is measured by camera. each dNTP is cleaved after incorperation. often do this with a circular DNA frag so that process can be repeated</li>
+<li>ONT uses nanopore and motor protein that accepts single DNA strand</li>
+</ul></li>
+</ul>
+<p>synthetic + illumina + 10xgenomics + both start with library of long fragments that are then separated, sheared and tagged so that short read sequencing can be used while keeping track of the original long fragment</p>
+<p>Throughput: Illumina short read: 800-900Gb pacbio: 1GB ONT: 1.5GB</p>
+<p>Error: I: .1% P: 1% O: 2-13%</p>
+<p>price: I: 7$/GB P: $1000/GB O: %750</p>
+<p>library prep:</p>
+</div>
+</div>
+<div id="rna-seq" class="section level1">
+<h1>RNA-seq:</h1>
+<p>tissue -&gt; extraction -&gt; quant -&gt; rRNA depletion -&gt; polyA enrichment (pull down of intact mature mRNA) -&gt; fragmentation -&gt; cDNA reverse transcription -&gt; lig8 adaptors to both ends -&gt; PCR amplification</p>
+</div>
+<div id="gbs" class="section level1">
+<h1>GBS:</h1>
+<p>gDNA -&gt; digestion -&gt; number/mean length of fragments will depend on target seq of restriction enzyme -&gt; ligate barcoded adaptors -&gt; multiplex (pool individuals ) -&gt; PCR</p>
 <hr />
 <div id="id-section12"></div>
 
-</div>
 <div id="entry-12-2020-01-16-thursday." class="section level3">
 <h3>Entry 12: 2020-01-16, Thursday.</h3>
 <hr />
@@ -317,10 +347,26 @@ $(document).ready(function () {
 </div>
 <div id="entry-14-2020-01-20-monday." class="section level3">
 <h3>Entry 14: 2020-01-20, Monday.</h3>
+</div>
+</div>
+<div id="bseq" class="section level1">
+<h1>BSeq:</h1>
+<p>where are methylated cytosines within my genome. aka, which cpg islands are methylated to inactivate a nearby promoter gDNA -&gt; treat with sodiumbisulfite which will mehtylated cytosines into uracil -&gt; PCR amplify -&gt; sequence treated and untreated -&gt; compare treated and untreated and look for TG rather in than CG in treated sample</p>
+</div>
+<div id="chipseq-chromatin-immunoprecipitation" class="section level1">
+<h1>CHIPseq: (chromatin immunoprecipitation)</h1>
+<p>gDNA -&gt; treat to crosslink regulator proteins to DNA -&gt; fragment DNA -&gt; introduce antibody for protein of interest that are attached to beads -&gt; pull down only DNA fragments that are bound to protein of interest -&gt; precipitate, decouple, and sequence</p>
+</div>
+<div id="atac-seq-looking-at-chromatin-accessability" class="section level1">
+<h1>ATAC-Seq: looking at chromatin accessability</h1>
+<p>gDNA -&gt; introduce synthetic transposon that will fragment only open chromatin and add adapters to fragments -&gt; pcr -&gt; sequence</p>
+</div>
+<div id="hic-seq" class="section level1">
+<h1>HiC-seq:</h1>
+<p>helps look at 3D structure of genome and partion cis and trans regulation: crosslink all DNA that is touching eachother and pull them out -&gt; biotnylate to form a chimeric combination of the 2 sequences -&gt; sequence</p>
 <hr />
 <div id="id-section15"></div>
 
-</div>
 <div id="entry-15-2020-01-21-tuesday." class="section level3">
 <h3>Entry 15: 2020-01-21, Tuesday.</h3>
 <hr />
@@ -329,10 +375,27 @@ $(document).ready(function () {
 </div>
 <div id="entry-16-2020-01-22-wednesday." class="section level3">
 <h3>Entry 16: 2020-01-22, Wednesday.</h3>
+</div>
+</div>
+<div id="amplicon-seq" class="section level1">
+<h1>Amplicon Seq:</h1>
+<p>Amplicon= PCR product that usually contains repeat regions (either head-to-head repeat or inverted repeates) used for deep coverage of specific area to look for rare variants helpful in metagenomics when you’re just looking for one identifying region for community construction (ITS, 16srRNA)</p>
+<p>lib prep uses pcr with target-specific primers, which is followed by an optional purification step and then another pcr for anealing barcodes (if you want to look at multiple genes per sample). no fragmentation needed in lib prep becasue pcr should be amplifying fragments that are already short enough for illumina</p>
+</div>
+<div id="exome-capture-seq" class="section level1">
+<h1>exome capture seq</h1>
+<ul>
+<li>helpful for genetic mapping of tratis in big, confusing genomes</li>
+<li>helpful for distilling sequenced variants down to stuff that’s more likely to be causal</li>
+<li>exons are more conserved than other regions, so this is helpful in phylogenetics too</li>
+<li>nice for aDNA bc WGS is annoying with poor sample quality</li>
+<li>lib prep: gDNA -&gt; fragmentation to blunt ends -&gt; adenine tail addition -&gt; adaptors added to both ends fo fragments -&gt; use custom probes to pull down exonic regions ways to make probes: -PCR: good for ~100 loci. cheaper option (in a per individual sense). basically the same as amplicon seq. -De Novo: good for thousands of loci (cheaper in a per probe sense) requires transcriptome data -Divergent annotated genome: good for thousands of loci (cheaper in a per probe sense) requires annotated genome of related sp</li>
+<li>no matter how you do it, you will be getting more than just the exome bc the probes will bind to exomic regions BUT they will pull down the entire fragment, which could contain introns</li>
+<li>best to design probes using multiple transcriptomes</li>
+</ul>
 <hr />
 <div id="id-section17"></div>
 
-</div>
 <div id="entry-17-2020-01-23-thursday." class="section level3">
 <h3>Entry 17: 2020-01-23, Thursday.</h3>
 <hr />
@@ -347,6 +410,36 @@ $(document).ready(function () {
 </div>
 <div id="entry-19-2020-01-27-monday." class="section level3">
 <h3>Entry 19: 2020-01-27, Monday.</h3>
+<p>population genomics: selection and drift across the genome</p>
+<p>damn hard to separate the genomic signal of selection from the genomic signal of changes in distribution from changes in selection</p>
+<p>genome-wide methodology is crucial because there is generally variation in polymorphsim across different regions of the genome, so you will be biasing your inference if you only focuss on one region</p>
+<p>effect of drift is global, while effect of selection is local &lt;- struggling to agree with this</p>
+<ul>
+<li>demographic history:
+<ul>
+<li>effective populaiton size</li>
+<li>migration (gene flow) among populations</li>
+<li>divergence time</li>
+<li>coalescent theory (Kingman, Watterson, Tajima, Hudson)
+<ul>
+<li>you expect 2*Ne allele copies in a population. for 2 individuals, the odds that the alleles that they have descended from common ancestor in the past generation = 1/2Ne</li>
+<li>coalesence event = two individuals inheret an allele copy from a common ancestor</li>
+<li>so this implies that rate of coalesence is dependent on pop size</li>
+<li>requires a wright fisher population (constant in size and population)</li>
+<li>allele copies you see in a pop are just the ones that have been passed on</li>
+<li>for any given generation of a population, there is a number of generations in the past that you would have to go to find the common ancestor of all of the allelic copies present in the populaiton</li>
+</ul></li>
+</ul></li>
+<li>as a population grows, the more rare alleles you see. A bottle necked pop tends to lose rare alleles and maintain common ones
+<ul>
+<li>so a population coming out of a selective sweep can look like a population boom</li>
+<li>so need to measure the hypothesis of a selective sweep against the background of coalesence</li>
+</ul></li>
+<li>reduction in nucleotide diversity of a region of genome due to selective sweep will increase LD in that region</li>
+</ul>
+<p>FDR explained: if I perform the same test of the same statistic for 100 loci, and each time I have a P value cuttoff of .05 for singnificane, then I should have 5 loci that were incorrectly called significant</p>
+<p>reverse ecology: approach genomic data agnostically and then let outliers generate hypothese about whats going on ecologically/physiologically</p>
+<p>3’ seq increases your power to detect DE at low coverage bc you aren’t diluting your coverage across the whole transcript length</p>
 <hr />
 <div id="id-section20"></div>
 
@@ -359,10 +452,72 @@ $(document).ready(function () {
 </div>
 <div id="entry-21-2020-01-29-wednesday." class="section level3">
 <h3>Entry 21: 2020-01-29, Wednesday.</h3>
+</div>
+</div>
+<div id="in-class-129-popgen-day-1" class="section level1">
+<h1>in class 1/29 “popgen day 1”</h1>
+<p>Q score == prob that sequencer got basecall wrong</p>
+<p>I am woking with the XSK reads</p>
+<pre class="bash"><code>
+# note that server is running Red Hat 7.7
+
+# fastq files for exome capture located here
+cd /data/project_data/RS_ExomeSeq/fastq/edge_fastq/
+</code></pre>
+<p>heres the script we wrote for fastqc (fastqc.sh)</p>
+<pre class="bash"><code>
+#!/bin/bash
+
+cd ~/Ecological-Genomics/myresults
+
+mkdir fastqc
+
+for file in /data/project_data/RS_ExomeSeq/fastq/edge_fastq/XSK*fastq.gz
+
+do
+
+fastqc ${file} -o fastqc/
+
+done</code></pre>
+<p>then hit it with a chmod u+x</p>
+<pre class="bash"><code>./fastqc.sh</code></pre>
+<p>then we used trimmomatic with the script (Ecological-Genomics/myscripts/trim_loop.sh)</p>
+<p>homework = run fastqc on trimmed seqs</p>
+<pre class="bash"><code>cp /data/scripts/process_bam.sh myscripts/</code></pre>
+<p>here’s the script (after I edited it)</p>
+<pre class="bash"><code>#!/bin/bash
+
+# We'll use this a wrapper to run our different mapping scripts
+
+# Path to my repo
+myrepo=&quot;/users/b/w/bwworthi/Ecological-Genomics&quot;
+
+# echo ${myrepo}  &lt;- to call my repo
+
+# My population:
+mypop=&quot;XSK&quot;
+
+# Directory to our cleaned and paired reads:
+input=&quot;/data/project_data/RS_ExomeSeq/fastq/edge_fastq/pairedcleanreads/${mypop}&quot;
+
+# Directory to store the outputs of our mapping
+# This part below goes to the common space
+output=&quot;/data/project_data/RS_ExomeSeq/mapping&quot;
+
+# Run mapping.sh
+source ./mapping.sh
+
+# Run the post-processing steps
+source ./process_bam.sh</code></pre>
+<p>now run the mapping pipeline script</p>
+<pre class="bash"><code># from within screen
+cd myscripts/
+
+bash mypipeline.sh
+</code></pre>
 <hr />
 <div id="id-section22"></div>
 
-</div>
 <div id="entry-22-2020-01-30-thursday." class="section level3">
 <h3>Entry 22: 2020-01-30, Thursday.</h3>
 <hr />
@@ -371,6 +526,44 @@ $(document).ready(function () {
 </div>
 <div id="entry-23-2020-01-31-friday." class="section level3">
 <h3>Entry 23: 2020-01-31, Friday.</h3>
+<p>find the flag code of the last read in a sam file then you can search it on here <a href="https://broadinstitute.github.io/picard/explain-flags.html" class="uri">https://broadinstitute.github.io/picard/explain-flags.html</a></p>
+<pre class="bash"><code>tail -n 1 XSK_01.sam | awk '{print $2}'</code></pre>
+<p>flagsats for each bam file</p>
+<p>heres’s the script</p>
+<pre class="bash"><code>#!/bin/bash
+
+# set repo
+
+myrepo=&quot;/users/b/w/bwworthi/Ecological-Genomics/&quot;
+
+mypop=&quot;XSK&quot;
+
+output=&quot;/data/project_data/RS_ExomeSeq/mapping/&quot;
+
+echo &quot;Num.reads R1 R2 Paired MateMapped Singletons MateMappedDiffChr&quot; &gt; ${myrepo}/myresults/${mypop}.flagstats.txt
+
+for file in ${output}/BWA/${mypop}*.sorted.rmdup.bam
+
+    do 
+    
+f=${file/.sorted.rmdup.bam}
+name=`basename ${f}`
+echo $name &gt;&gt; ${myrepo}/myresults/${mypop}.names.txt
+
+# take flagstat output, grab only rows between 6 and 12 and then take first col and flip it into a row 
+samtools flagstat ${file} | awk 'NR&gt;=6&amp;&amp;NR&lt;=12 {print $1}' | column -x 
+
+done &gt;&gt; ${myrepo}/myresults/${mypop}.flagstats.txt
+
+# find depth of coverage for these
+
+for file in ${output}/BWA/${mypop}*.sorted.rmdup.bam
+
+    do
+    # find average depth across all locations 
+    samtools depth ${file} | awk '{sum+=$3} END {print sum/NR}'
+    done &gt;&gt; ${myrepo}/myresults/${mypop}.coverage.txt</code></pre>
+<pre class="bash"><code>bash myscripts/bamstats.sh</code></pre>
 <hr />
 <div id="id-section24"></div>
 
@@ -389,6 +582,77 @@ $(document).ready(function () {
 </div>
 <div id="entry-26-2020-02-05-wednesday." class="section level3">
 <h3>Entry 26: 2020-02-05, Wednesday.</h3>
+<p>working with low coverage (our mean is ~3.5) data makes it hard to confidently call genotypes at ambiguous sites, this is why we use ANGSD because it doesn’t hard call genos, it just uses the 3 probabilites of hetero, homo minor, homo major aka “genotype-free pop gen”</p>
+<p>need to copy some of the scripts used above into the RMD</p>
+<pre class="bash"><code>myrepo=&quot;/users/b/w/bwworthi/Ecological-Genomics&quot;
+
+mkdir ${myrepo}/myresults/ANGSD
+
+output=&quot;${myrepo}/myresults/ANGSD&quot;
+
+mypop=&quot;XSK&quot;
+
+# grab all the names of all bam files for my pop
+ls /data/project_data/RS_ExomeSeq/mapping/BWA/${mypop}_*sorted.rm*.bam &gt;${output}/${mypop}_bam.list
+
+# get ref genome 
+
+REF=&quot;/data/project_data/RS_ExomeSeq/ReferenceGenomes/Pabies1.0-genome_reduced.fa&quot;
+
+# Estimating GL's and allele frequencies for all sites with ANGSD
+# notice in second line we're calling the ref genome he ancestral state for all sites (which is BS but our only option)
+# we establish min mapping and read quality 
+# min depth is set to 3 based on our expected sequencing depth
+
+
+ANGSD -b ${output}/${mypop}_bam.list \
+-ref ${REF} -anc ${REF} \
+-out ${output}/${mypop}_allsites \
+-nThreads 1 \
+-remove_bads 1 \
+-C 50 \
+-baq 1 \
+-minMapQ 20 \
+-minQ 20 \
+-setMinDepth 3 \
+-minInd 2 \
+-setMinDepthInd 1 \
+-setMaxDepthInd 17 \
+-skipTriallelic 1 \
+-GL 1 \
+-doCounts 1 \
+-doMajorMinor 1 \
+-doMaf 1 \
+-doSaf 1 \
+-doHWE 1 \
+# -SNP_pval 1e-6
+
+
+# now re- doing bc our ref is not truly ancestral and we want to fold over the frequency spectrum 
+
+# NOTE THAT I DID NOT EDIT ANGSD_mypop.sh to include this
+
+ANGSD -b ${output}/${mypop}_bam.list \
+-ref ${REF} -anc ${REF} \
+-out ${output}/${mypop}_outFold \
+-nThreads 4 \
+-remove_bads 1 \
+-C 50 \
+-baq 1 \
+-minMapQ 20 \
+-minQ 20 \
+-setMinDepth 3 \
+-minInd 2 \
+-setMinDepthInd 1 \
+-setMaxDepthInd 17 \
+-skipTriallelic 1 \
+-GL 1 \
+-doCounts 1 \
+-doMajorMinor 1 \
+-doMaf 1 \
+-doSaf 1 \
+-fold 1  
+</code></pre>
 <hr />
 <div id="id-section27"></div>
 
@@ -449,6 +713,27 @@ $(document).ready(function () {
 </div>
 <div id="entry-36-2020-02-19-wednesday." class="section level3">
 <h3>Entry 36: 2020-02-19, Wednesday.</h3>
+<p>site freqency spectrum:</p>
+<p>x axis = frequency of derived allele. units are 2*N (2 bc assuming diploid), so if some derived allele is fixed in the population, if will have a requnecy of 2N (everyone is homozygous for it). y axis = proportion of total alleles that fall into each level of frequency</p>
+<p>expectation based on coalescent theory == negative poisson looking histogram, as we would expect most derived allels to be present at low frequency</p>
+<p>our issue: spike of high freqency for loci that are polypmorphic in everyone + cause = our assumption that reference is ancestral is wrong</p>
+<p>solution= re run angsd but make SFS based on minor allele rather than derived allele which will essentially fold the SFS over at x =1N (N = total # individuals)</p>
+<p>note that a selective sweep will produce an SFS that has many more common and rare derived allleles than expected under the neutral model. …also note that a selective sweep will have a larger effect on Tajima’s estimator than on waterson’s theta.</p>
+<p>theta = the expected number of mutations within a linage. theta=4Nut where t is divergence time and u is mutation rate pi = number of pairwise diffs</p>
+<p>theta estimated from pi is called tajima’s estimator</p>
+<ul>
+<li>tajima’s D:
+<ul>
+<li>used to decetect deviations from the distribution of allele frequencies that we would expect under neutrality</li>
+<li>requires 2 other stats: Waterson’s theta (number of segregating sites) and Tajima’s estimator (based on average number of pairwise differences)</li>
+<li>both stats are expected to give the same estimate under neutrality, but when a slecective sweep happens, wtersons will be greater than taj’s. the reverse is true for balancing selection.</li>
+<li>Taj’s D = (Taj’s estimator - waterson’s theta)/sqrt(var(Taj’s estimator - waterson’s theta))</li>
+<li>=0 under neutrality</li>
+<li>=+ if balancing slection</li>
+<li>=- if recent selective sweep</li>
+</ul></li>
+</ul>
+<p>plan going forward: site freq spectrum estimate -&gt; estimate real sfs -&gt; calculate theta (doTheta) -&gt; theta_stats -&gt; finally have measure of nucleotide diversity</p>
 <hr />
 <div id="id-section37"></div>
 
@@ -467,6 +752,10 @@ $(document).ready(function () {
 </div>
 <div id="entry-39-2020-02-24-monday." class="section level3">
 <h3>Entry 39: 2020-02-24, Monday.</h3>
+<p>reverse ecology: letting signatures of selection in genetic data inform you as to what phenotypes are ecologically important</p>
+<p>Transcriptomics: “Experimentally hold/control envrironmental condtitions constant to reveal genetically-controled diff. of phenotypes at the molecular level” (?????????????????)</p>
+<p>Could do proteomics but it’s more expensive and can’t look for mutations (????)</p>
+<p>factors affecting expression: * common garden * Treatments * Populations * Tissue/cell * Life history * Transgenerational environment * Sex, reproductive stage</p>
 <hr />
 <div id="id-section40"></div>
 
@@ -599,6 +888,39 @@ $(document).ready(function () {
 </div>
 <div id="entry-61-2020-03-25-wednesday." class="section level3">
 <h3>Entry 61: 2020-03-25, Wednesday.</h3>
+<ul>
+<li>changes in gene expression not due to changes in sequence
+<ul>
+<li>“stable, long-term alterations in the trancriptional ptential of a cell that are not necessarily heritable”</li>
+<li>so we usually partition it as Ve</li>
+</ul></li>
+<li>Mechanisms:
+<ul>
+<li>phosphorylation of DNA or Protein</li>
+<li>miRNA or siRNA lead to transcription withiout translation</li>
+<li>Histone modification: conversion to euchromatin allows transcription</li>
+</ul></li>
+<li>Methylation:
+<ul>
+<li>can cause irreverible conversion to thymine that I don’t understand</li>
+<li>High methylation of promoter and enhancer = repression of expression via inhibition of TF binding</li>
+<li>gene body methylation is oposite of promoter/enhancer methylation; it increases expression of gene in question
+<ul>
+<li>can also affect splicing</li>
+</ul></li>
+<li>in intergenic regions, can also act to silence TEs, Steve hypothesizes that this might be origin for evolution of methylation</li>
+</ul></li>
+<li>BSseq
+<ul>
+<li>sodium bisulfite changes non-mtehylated cytosine to uracil</li>
+<li>pcr amplification converts them to T</li>
+</ul></li>
+</ul>
+<p>experimental evo experiment where you expose copipods to control, high tempm high co2 and temp + high co2</p>
+<p>used targeted sequencing of cpg sites using restriction enzymes that cut at ccgg + this enzyme cuts at cpgs BUT it is not sensitive to methylation</p>
+<pre><code>use spike in of DNA that is known to be unmethylated to use as measure of C-T conversion efficiency in BS seq </code></pre>
+<p>when we align these reads, we need a version of the genome where we convert Cs to Ts and Ts to As</p>
+<p>then need to fully change the reads the same way, and then keep track of which were changed (program keeps track of this)</p>
 <hr />
 <div id="id-section62"></div>
 

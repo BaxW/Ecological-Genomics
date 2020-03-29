@@ -166,6 +166,23 @@ chunk_output_type: console
 
 ### Entry 9: 2020-01-13, Monday.   
 
+Fst as direct product of Wright's island model. each island has pop of same size so begs the question how much does drift alone (bc no selection in this model) affect allele freq differences in each pop and how does pop size decay this expected Fst
+
+Fisher's thought on relative fitness of alleles: should see rapid fixation of selected alllele in any pop and therefore you would expect v little standing variation (save for minor allele sheltering in heterozygotes due to dominance)... SO why is there ever standing variation
+
+ecological genomics is all about wtf is the expalanation for this standing variation 
+
+molecular evolution:
+M. Kimura: neutral theory of molecualr evolution: p(new mutation)= 1/2N = prob of fixation of mutation (assuming neutral)
+    - enter modern central dogma: well tunrs out wobble exists so some mutations are synonimous |- dN/dS = Nmutations/N non-synom sites / N synonimous mutations / N synon sites = w
+    w >> 1 positive slection
+    w = 1 neutral
+    w << 1 negative/purifying selection
+    
+
+            
+            
+Ecological genomics = molecular evolution + pop gen + ecology + NGS data
 
 
 ------
@@ -179,6 +196,62 @@ chunk_output_type: console
 <div id='id-section11'/>   
 
 ### Entry 11: 2020-01-15, Wednesday.   
+
+ILLumina:
+
+shear genomic DNA into 200-300bp fragments
+ligate adaptors 
+apply to flowcell that contains lawn of complimentaary adaptors 
+have adaptors with primers built in on both ends so bridge can form. can then create clusters of the same fragment via bridge amplification PCR
+then sequenceing throug synthesis with flourencently-tagged bases (dNTPs) that have a built in terminator that can be cleaved before the next pulse of dNTPs
+
+myseq: 30mill reads per run
+hiseq: 3bill
+novaseq 13 bill 
+sanger: 400 
+
+
+long read sequencing:
+
+SMRT- single molecule realtime tech
+    +pacbio
+    + ONT
+    
+* Pacbio:
+    + DNA strand is fed to fixed-position polymerase within a well that contains laser/camera. Still uses dNTP that are incorperated and floouresence is measured by camera. each dNTP is cleaved after incorperation. often do this with a circular DNA frag so that process can be repeated 
+    + ONT uses nanopore and motor protein that accepts single DNA strand 
+    
+synthetic
+    + illumina
+    + 10xgenomics
+    + both start with library of long fragments that are then separated, sheared and tagged so that short read sequencing can be used while keeping track of the original long fragment 
+    
+
+Throughput:
+Illumina short read: 800-900Gb
+pacbio: 1GB
+ONT: 1.5GB
+
+Error:
+I: .1%
+P: 1%
+O: 2-13%
+
+price:
+I: 7$/GB
+P: $1000/GB
+O: %750
+
+library prep:
+
+# RNA-seq:
+ tissue -> extraction -> quant -> rRNA depletion -> polyA enrichment (pull down of intact mature mRNA) -> fragmentation -> cDNA reverse transcription -> lig8 adaptors to both ends -> PCR amplification 
+
+# GBS:
+gDNA -> digestion -> number/mean length of fragments will depend on target seq of restriction enzyme -> ligate barcoded adaptors -> multiplex (pool individuals ) -> PCR 
+
+ 
+
 
 
 
@@ -202,6 +275,20 @@ chunk_output_type: console
 ### Entry 14: 2020-01-20, Monday.   
 
 
+# BSeq:
+where are methylated cytosines within my genome. aka, which cpg islands are methylated to inactivate a nearby promoter 
+gDNA -> treat with sodiumbisulfite which will mehtylated cytosines into uracil -> PCR amplify -> sequence treated and untreated -> compare treated and untreated and look for TG rather in than CG in treated sample 
+
+
+# CHIPseq: (chromatin immunoprecipitation)
+gDNA -> treat to crosslink regulator proteins to DNA -> fragment DNA -> introduce antibody for protein of interest that are attached to beads -> pull down only DNA fragments that are bound to protein of interest -> precipitate, decouple, and sequence 
+
+# ATAC-Seq: looking at chromatin accessability 
+gDNA -> introduce synthetic transposon that will fragment only open chromatin and add adapters to fragments -> pcr -> sequence 
+
+# HiC-seq: 
+helps look at 3D structure of genome and partion cis and trans regulation:
+crosslink all DNA that is touching eachother and pull them out -> biotnylate to form a chimeric combination of the 2 sequences -> sequence
 
 ------
 <div id='id-section15'/>   
@@ -214,7 +301,25 @@ chunk_output_type: console
 <div id='id-section16'/>   
 
 ### Entry 16: 2020-01-22, Wednesday.   
+# Amplicon Seq:
+Amplicon= PCR product that usually contains repeat regions (either head-to-head repeat or inverted repeates)
+used for deep coverage of specific area to look for rare variants 
+helpful in metagenomics when you're just looking for one identifying region for community construction (ITS, 16srRNA)
 
+lib prep uses pcr with target-specific primers, which is followed by an optional purification step and then another pcr for anealing barcodes (if you want to look at multiple genes per sample). no fragmentation needed in lib prep becasue pcr should be amplifying fragments that are already short enough for illumina 
+
+# exome capture seq
+* helpful for genetic mapping of tratis in big, confusing genomes 
+* helpful for distilling sequenced variants down to stuff that's more likely to be causal 
+* exons are more conserved than other regions, so this is helpful in phylogenetics too
+* nice for aDNA bc WGS is annoying with poor sample quality
+* lib prep: gDNA -> fragmentation to blunt ends -> adenine tail addition -> adaptors added to both ends fo fragments -> use custom probes to pull down exonic regions
+ways to make probes:
+-PCR: good for ~100 loci. cheaper option (in a per individual sense). basically the same as amplicon seq. 
+-De Novo: good for thousands of loci (cheaper in a per probe sense) requires transcriptome data
+-Divergent annotated genome: good for thousands of loci (cheaper in a per probe sense) requires annotated genome of related sp 
+* no matter how you do it, you will be getting more than just the exome bc the probes will bind to exomic regions BUT they will pull down the entire fragment, which could contain introns
+* best to design probes using multiple transcriptomes 
 
 
 ------
@@ -236,6 +341,40 @@ chunk_output_type: console
 
 ### Entry 19: 2020-01-27, Monday.   
 
+population genomics: selection and drift across the genome 
+
+damn hard to separate the genomic signal of selection from the genomic signal of changes in distribution from changes in selection 
+
+genome-wide methodology is crucial because there is generally variation in polymorphsim across different regions of the genome, so you will be biasing your inference if you only focuss on one region 
+
+effect of drift is global, while effect of selection is local <- struggling to agree with this 
+
+* demographic history:
+    + effective populaiton size
+    + migration (gene flow) among populations
+    + divergence time
+    + coalescent theory (Kingman, Watterson, Tajima, Hudson)
+        + you expect 2*Ne allele copies in a population. for 2 individuals, the odds that the alleles that they have descended from common ancestor in the past generation = 1/2Ne
+        + coalesence event = two individuals inheret an allele copy from a common ancestor 
+        + so this implies that rate of coalesence is dependent on pop size 
+        + requires a wright fisher population (constant in size and population)
+        + allele copies you see in a pop are just the ones that have been passed on 
+        + for any given generation of a population, there is a number of generations in the past that you would have to go to find the common ancestor of all of the allelic copies present in the populaiton 
+        
+* as a population grows, the more rare alleles you see. A bottle necked pop tends to lose rare alleles and maintain common ones
+    +  so a population coming out of a selective sweep can look like a population boom
+    + so need to measure the hypothesis of a selective sweep against the background of coalesence 
+
+* reduction in nucleotide diversity of a region of genome due to selective sweep will increase LD in that region 
+
+FDR explained: if I perform the same test of the same statistic for 100 loci, and each time I have a P value cuttoff of .05 for singnificane, then I should have 5 loci that were incorrectly called significant 
+
+reverse ecology: approach genomic data agnostically and then let outliers generate hypothese about whats going on ecologically/physiologically 
+
+
+
+3' seq increases your power to detect DE at low coverage bc you aren't diluting your coverage across the whole transcript length
+
 
 
 ------
@@ -254,7 +393,7 @@ chunk_output_type: console
 Q score == prob that sequencer got basecall wrong
 
 I am woking with the XSK reads 
-```{bash}
+```{bash, eval=F}
 
 # note that server is running Red Hat 7.7
 
@@ -267,7 +406,7 @@ cd /data/project_data/RS_ExomeSeq/fastq/edge_fastq/
 heres the script we wrote for fastqc (fastqc.sh)
 
 
-```{bash}
+```{bash, eval=F}
 
 #!/bin/bash
 
@@ -286,7 +425,7 @@ done
 
 then hit it with a chmod u+x
 
-```{bash}
+```{bash, eval=F}
 ./fastqc.sh
 ```
 
@@ -296,13 +435,13 @@ then we used trimmomatic with the script (Ecological-Genomics/myscripts/trim_loo
 homework = run fastqc on trimmed seqs 
 
 
-```{bash}
+```{bash, eval=F}
 cp /data/scripts/process_bam.sh myscripts/
 ```
 
 here's the script (after I edited it)
 
-```{bash}
+```{bash, eval=F}
 #!/bin/bash
 
 # We'll use this a wrapper to run our different mapping scripts
@@ -333,7 +472,7 @@ source ./process_bam.sh
 
 now  run the mapping pipeline script 
 
-```{bash}
+```{bash, eval=F}
 # from within screen
 cd myscripts/
 
@@ -357,7 +496,7 @@ bash mypipeline.sh
 find the flag code of the last read in a sam file 
 then you can search it on here https://broadinstitute.github.io/picard/explain-flags.html
 
-```{bash}
+```{bash, eval=F}
 tail -n 1 XSK_01.sam | awk '{print $2}'
 ```
 
@@ -365,7 +504,7 @@ flagsats for each bam file
 
 heres's the script 
 
-```{bash}
+```{bash, eval=F}
 #!/bin/bash
 
 # set repo
@@ -402,7 +541,7 @@ for file in ${output}/BWA/${mypop}*.sorted.rmdup.bam
 ```
 
 
-```{bash}
+```{bash, eval=F}
 bash myscripts/bamstats.sh
 ```
 
@@ -425,6 +564,82 @@ bash myscripts/bamstats.sh
 
 ### Entry 26: 2020-02-05, Wednesday.   
 
+working with low coverage (our mean is ~3.5) data makes it hard to confidently call genotypes at ambiguous sites, this is why we use ANGSD because it doesn't hard call genos, it just uses the 3 probabilites of hetero, homo minor, homo major 
+aka "genotype-free pop gen"
+
+need to copy some of the scripts used above into the RMD
+
+```{bash, eval=F}
+myrepo="/users/b/w/bwworthi/Ecological-Genomics"
+
+mkdir ${myrepo}/myresults/ANGSD
+
+output="${myrepo}/myresults/ANGSD"
+
+mypop="XSK"
+
+# grab all the names of all bam files for my pop
+ls /data/project_data/RS_ExomeSeq/mapping/BWA/${mypop}_*sorted.rm*.bam >${output}/${mypop}_bam.list
+
+# get ref genome 
+
+REF="/data/project_data/RS_ExomeSeq/ReferenceGenomes/Pabies1.0-genome_reduced.fa"
+
+# Estimating GL's and allele frequencies for all sites with ANGSD
+# notice in second line we're calling the ref genome he ancestral state for all sites (which is BS but our only option)
+# we establish min mapping and read quality 
+# min depth is set to 3 based on our expected sequencing depth
+
+
+ANGSD -b ${output}/${mypop}_bam.list \
+-ref ${REF} -anc ${REF} \
+-out ${output}/${mypop}_allsites \
+-nThreads 1 \
+-remove_bads 1 \
+-C 50 \
+-baq 1 \
+-minMapQ 20 \
+-minQ 20 \
+-setMinDepth 3 \
+-minInd 2 \
+-setMinDepthInd 1 \
+-setMaxDepthInd 17 \
+-skipTriallelic 1 \
+-GL 1 \
+-doCounts 1 \
+-doMajorMinor 1 \
+-doMaf 1 \
+-doSaf 1 \
+-doHWE 1 \
+# -SNP_pval 1e-6
+
+
+# now re- doing bc our ref is not truly ancestral and we want to fold over the frequency spectrum 
+
+# NOTE THAT I DID NOT EDIT ANGSD_mypop.sh to include this
+
+ANGSD -b ${output}/${mypop}_bam.list \
+-ref ${REF} -anc ${REF} \
+-out ${output}/${mypop}_outFold \
+-nThreads 4 \
+-remove_bads 1 \
+-C 50 \
+-baq 1 \
+-minMapQ 20 \
+-minQ 20 \
+-setMinDepth 3 \
+-minInd 2 \
+-setMinDepthInd 1 \
+-setMaxDepthInd 17 \
+-skipTriallelic 1 \
+-GL 1 \
+-doCounts 1 \
+-doMajorMinor 1 \
+-doMaf 1 \
+-doSaf 1 \
+-fold 1  
+
+```
 
 
 ------
@@ -545,6 +760,20 @@ plan going forward: site freq spectrum estimate -> estimate real sfs -> calculat
 
 ### Entry 39: 2020-02-24, Monday.   
 
+reverse ecology: letting signatures of selection in genetic data inform you as to what phenotypes are ecologically important 
+
+Transcriptomics: "Experimentally hold/control envrironmental condtitions constant to reveal genetically-controled diff. of phenotypes at the molecular level" (?????????????????)
+
+Could do proteomics but it's more expensive and can't look for mutations (????)
+
+factors affecting expression:
+* common garden
+* Treatments
+* Populations
+* Tissue/cell
+* Life history 
+* Transgenerational environment
+* Sex, reproductive stage
 
 
 ------
@@ -697,9 +926,43 @@ plan going forward: site freq spectrum estimate -> estimate real sfs -> calculat
 ------
 <div id='id-section61'/>   
 
-### Entry 61: 2020-03-25, Wednesday.   
+### Entry 61: 2020-03-25, Wednesday.  
+
+* changes in gene expression not due to changes in sequence 
+    + "stable, long-term alterations in the trancriptional ptential of a cell that are not necessarily heritable"
+    + so we usually partition it as Ve
+
+* Mechanisms:
+    + phosphorylation of DNA or Protein 
+    + miRNA or siRNA lead to transcription withiout translation
+    + Histone modification: conversion to euchromatin allows transcription
+    
+* Methylation:
+    + can cause irreverible conversion to thymine that I don't understand 
+    + High methylation of promoter and enhancer = repression of expression via inhibition of TF binding
+    + gene body methylation is oposite of promoter/enhancer methylation; it increases expression of gene in question 
+        + can also affect splicing 
+    + in intergenic regions, can also act to silence TEs, Steve hypothesizes that this might be origin for evolution of methylation 
+
+* BSseq
+    + sodium bisulfite changes non-mtehylated cytosine to uracil 
+    + pcr amplification converts them to T
 
 
+
+
+experimental evo experiment where you expose copipods to control, high tempm high co2 and temp + high co2
+
+used targeted sequencing of cpg sites using restriction enzymes that cut at ccgg
+    + this enzyme cuts at cpgs BUT it is not sensitive to methylation
+    
+    use spike in of DNA that is known to be unmethylated to use as measure of C-T conversion efficiency in BS seq 
+    
+
+
+when we align these reads, we need a version of the genome where we convert Cs to Ts and Ts to As 
+
+then need to fully change the reads the same way, and then keep track of which were changed (program keeps track of this)
 
 ------
 <div id='id-section62'/>   

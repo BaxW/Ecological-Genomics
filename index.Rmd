@@ -9,3 +9,5 @@ output:
 This site contains some of my materials for the Ecological Genomics class I am taking (Spring 2020)
 
 [My notebook for this class](EGgithubNotebook.html)
+
+[My scripts for this class](https://github.com/BaxW/Ecological-Genomics/tree/master/myscripts)
